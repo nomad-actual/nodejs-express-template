@@ -13,7 +13,7 @@ export function isProd() {
 export function toSha256Base64(s: string) {
     return createHash('sha256')
         .update(s)
-        .digest('base64')
+        .digest('hex')
 }
 
 export async function generatePasswordHash(pass: string) {
@@ -28,11 +28,11 @@ export async function generatePasswordHash(pass: string) {
     */
 
     return argon2.hash(pass, {
-        type: argon2.argon2id, // 
-        timeCost: 8, // num iterations
-        parallelism: 4, // num threads
+        type: argon2.argon2id,
+        timeCost: 8,        // num iterations
+        parallelism: 4,     // num threads
         hashLength: 40,
-        memoryCost: 65536, // bytes (default but we can do better)
+        memoryCost: 65536,  // bytes (default is 64MB)
     })
 
 }
