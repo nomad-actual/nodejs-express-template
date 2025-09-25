@@ -3,6 +3,7 @@ import { startHealthServer, stopHealthServer } from "./server/health.server.ts"
 import { loadConfig } from "./utils/config.ts"
 import logger from "./utils/logger.ts"
 import { init as initDb } from './server/db/database.ts'
+import { sleep } from "./utils/system.utils.ts"
 
 const config = loadConfig()
 
@@ -19,10 +20,6 @@ async function start() {
     await startAppServer(config.appServer)
 
     // todo swagger/open api server whe not running in prod
-}
-
-async function sleep(ms: number) {
-    return new Promise(res => setTimeout(res, ms))
 }
 
 async function shutdown() {
