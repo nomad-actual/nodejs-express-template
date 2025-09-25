@@ -39,8 +39,8 @@ async function shutdown() {
     }
 }
 
-process.on('SIGINT', () => shutdown().catch((e) => logger.error({ error: e }, 'Error on graceful shutdown')))
-process.on('SIGTERM', () => shutdown().catch((e) => logger.error({ error: e }, 'Error on graceful shutdown')))
+process.on('SIGINT', () => shutdown())
+process.on('SIGTERM', () => shutdown())
 
 
 start().catch((e) => {
