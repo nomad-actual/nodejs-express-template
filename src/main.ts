@@ -1,9 +1,9 @@
-import { startAppServer, stopAppServer } from "./server/app.server.ts"
-import { startHealthServer, stopHealthServer } from "./server/health.server.ts"
-import { loadConfig } from "./utils/config.ts"
-import logger from "./utils/logger.ts"
+import { startAppServer, stopAppServer } from './server/app.server.ts'
+import { startHealthServer, stopHealthServer } from './server/health.server.ts'
+import { loadConfig } from './utils/config.ts'
+import logger from './utils/logger.ts'
 import { init as initDb } from './server/db/database.ts'
-import { sleep } from "./utils/system.utils.ts"
+import { sleep } from './utils/system.utils.ts'
 
 const config = loadConfig()
 

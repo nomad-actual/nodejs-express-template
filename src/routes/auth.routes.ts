@@ -1,11 +1,11 @@
-import express from "express";
+import express from 'express';
 import jwt from 'jsonwebtoken'
 
-import { loadConfig } from "../utils/config.ts";
-import { validate } from "../server/middleware/validation.middleware.ts";
-import { type LoginPayloadRequest, LoginPayloadRequestSchema } from "./types.ts";
-import { type SessionModel as RefreshTokenModel, type UserModel, type UserSession as UserPayload } from "../types/types.ts";
-import * as db from "../server/db/database.ts";
+import { loadConfig } from '../utils/config.ts';
+import { validate } from '../server/middleware/validation.middleware.ts';
+import { type LoginPayloadRequest, LoginPayloadRequestSchema } from './types.ts';
+import { type SessionModel as RefreshTokenModel, type UserModel, type UserSession as UserPayload } from '../types/types.ts';
+import * as db from '../server/db/database.ts';
 
 const router = express.Router();
 const c = loadConfig()

@@ -1,10 +1,10 @@
-import express from "express";
-import { Server } from "http";
+import express from 'express';
+import { Server } from 'http';
 
 
-import { loadConfig, type HttpServerConfig } from "../utils/config.ts";
-import logger from "../utils/logger.ts";
-import httpLogger from "../utils/httpLogger.ts";
+import { loadConfig, type HttpServerConfig } from '../utils/config.ts';
+import logger from '../utils/logger.ts';
+import httpLogger from '../utils/httpLogger.ts';
 import AuthMiddleWare from './middleware/auth.middleware.ts'
 
 import UserRouter from '../routes/user.routes.ts'

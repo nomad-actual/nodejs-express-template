@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken'
 
-import logger from "../../utils/logger.ts"
-import { loadConfig } from "../../utils/config.ts"
-import { findSessionByUserId, findUserById } from "../db/database.ts"
+import logger from '../../utils/logger.ts'
+import { loadConfig } from '../../utils/config.ts'
+import { findSessionByUserId, findUserById } from '../db/database.ts'
 
 // hydrate the request from auth to req.context
 export default function isAllowed(req: any, res: any, next: Function) {

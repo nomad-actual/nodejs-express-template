@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto"
+import { createHash } from 'node:crypto'
 import * as argon2 from 'argon2'
 
 export async function sleep(ms: number) {

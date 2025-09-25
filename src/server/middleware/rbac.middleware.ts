@@ -1,4 +1,4 @@
-import logger from "../../utils/logger.ts"
+import logger from '../../utils/logger.ts'
 
 // todo export
 const roles: { [key: string]: number } = {

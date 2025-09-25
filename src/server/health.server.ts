@@ -1,7 +1,7 @@
-import express from "express";
-import { Server } from "http";
-import type { HttpServerConfig } from "../utils/config.ts";
-import logger from "../utils/logger.ts";
+import express from 'express';
+import { Server } from 'http';
+import type { HttpServerConfig } from '../utils/config.ts';
+import logger from '../utils/logger.ts';
 
 
 const healthApp = express();
