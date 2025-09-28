@@ -1,5 +1,4 @@
 import { Logger, QueryRunner } from "typeorm";
-import logger from "../../utils/logger";
 import pino from "pino";
 
 export class PinoTypeOrmLogger implements Logger {
