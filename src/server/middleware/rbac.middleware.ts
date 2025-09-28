@@ -1,4 +1,5 @@
 import logger from '../../utils/logger.ts'
+import { Request } from 'express'
 
 // todo export
 const roles: { [key: string]: number } = {
@@ -21,10 +22,9 @@ function isRoleMinOrBetter(requestRole: string, minRoleRequired: string) {
 
 
 export function checkPermissions(requiredMinRole: string) {
-    // todo - Make it typed
-    return (req: any, res: any, next: Function) => {
+    return (req: Request, res: any, next: Function) => {
         try {
-            const { role = '' } = req?.context || {}
+            const { role  = '' } = req.context || {}
 
             if (isRoleMinOrBetter(role, requiredMinRole) === false) {
                 res.status(403).send('Not authorized')
@@ -37,7 +37,7 @@ export function checkPermissions(requiredMinRole: string) {
             next()
         } catch (e: any) {
             logger.warn({ error: e }, `Token verification issue (${e.message})`)
-            res.status(401).send('Unauthorized')
+            res.status(403).send('Not authorized')
         }
     }
 }

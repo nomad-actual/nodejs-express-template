@@ -2,7 +2,6 @@ import express from 'express';
 import { validate } from '../server/middleware/validation.middleware.ts';
 import * as db from '../server/db/database.ts'
 import { type GetUserByIdRequest, GetUserByIdSchema } from './types.ts';
-import logger from '../utils/logger.ts';
 
 const router = express.Router();
 
