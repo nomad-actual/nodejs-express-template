@@ -1,7 +1,4 @@
 # nodejs-express-template
-Just a simple template
-
-# NodeJS template
 
 This is meant as a simple way to have a small running service with some
 reasonable good practices and a place to have documentation and logging
