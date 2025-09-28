@@ -1,6 +1,34 @@
+import { DataSource } from 'typeorm'
 import { type UserModel, type SessionModel } from '../../types/types.ts'
 import logger from '../../utils/logger.ts'
 import { generatePasswordHash } from '../../utils/system.utils.ts'
+import { PinoTypeOrmLogger } from './db.logger.ts'
+
+
+
+
+
+export function getLegacyDb() {
+    // mysql
+    // can get config from config but we need the config here 
+    // regardless
+    const legacyDbDataSource = new DataSource({
+        type: 'mysql',
+        host: '',
+        port: 3306, // ??
+        username: "test",
+        password: "test",
+        database: "test",
+        synchronize: false,
+        logger: new PinoTypeOrmLogger(logger),
+        entities: [], // todo
+        subscribers: [],
+        migrations: [],
+    })
+}
+
+
+
 
 
 

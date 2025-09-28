@@ -5,6 +5,9 @@ import logger from './utils/logger.ts'
 import { init as initDb } from './server/db/database.ts'
 import { sleep } from './utils/system.utils.ts'
 
+// needs import somewhere global
+import 'reflect-metadata'
+
 const config = loadConfig()
 
 async function start() {
