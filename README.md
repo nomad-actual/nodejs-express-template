@@ -12,11 +12,11 @@ libraries chosen.
 
 ## Todo
 
-- [ ] typed requests
+- [x] typed requests
 - [ ] openapi docs
 
 
 <!-- space for database storage -->
-- [ ] Sequelize
+- [ ] TypeORM
 - [ ] Mongodb
-- [ ] Hook up real authentication to fakedb
+- [ ] Hook up real authentication to in-mem fakedb
