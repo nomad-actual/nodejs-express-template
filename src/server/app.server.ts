@@ -2,13 +2,13 @@ import express from 'express';
 import { Server } from 'http';
 
 
-import { loadConfig, type HttpServerConfig } from '../utils/config.ts';
-import logger from '../utils/logger.ts';
-import httpLogger from '../utils/httpLogger.ts';
-import AuthMiddleWare from './middleware/auth.middleware.ts'
+import { type HttpServerConfig } from '../utils/config.js';
+import logger from '../utils/logger.js';
+import httpLogger from '../utils/httpLogger.js';
+import AuthMiddleWare from './middleware/auth.middleware.js'
 
-import UserRouter from '../routes/user.routes.ts'
-import AuthRouter from '../routes/auth.routes.ts'
+import UserRouter from '../routes/user.routes.js'
+import AuthRouter from '../routes/auth.routes.js'
 
 let appServer: Server;
 

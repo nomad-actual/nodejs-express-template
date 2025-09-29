@@ -1,11 +1,10 @@
 import express from 'express';
 import jwt from 'jsonwebtoken'
 
-import { loadConfig } from '../utils/config.ts';
-import { validate } from '../server/middleware/validation.middleware.ts';
-import { type LoginPayloadRequest, LoginPayloadRequestSchema } from './types.ts';
-import { type SessionModel as RefreshTokenModel, type UserModel, type UserSession as UserPayload } from '../types/types.ts';
-import * as db from '../server/db/database.ts';
+import { loadConfig } from '../utils/config.js';
+import { validate } from '../server/middleware/validation.middleware.js';
+import { type LoginPayloadRequest, LoginPayloadRequestSchema } from './types.js';
+import { type SessionModel as RefreshTokenModel, type UserModel, type UserSession as UserPayload } from '../types/types.js';
 
 const router = express.Router();
 const c = loadConfig()
@@ -27,7 +26,8 @@ function createAndSaveSession(u: UserModel) {
 
     }
 
-    db.saveRefreshToken(u.userId, session)
+    // db.saveRefreshToken(u.userId, session)
+    console.log(session)
 
     return {
         token: jwt.sign(userPayload, c.jwtSecret, {
@@ -48,12 +48,12 @@ function createAndSaveSession(u: UserModel) {
 }
 
 router.post('/login', validate({ body: LoginPayloadRequestSchema }), async (
-    req: express.Request<{}, {}, LoginPayloadRequest>,
+    _req: express.Request<{}, {}, LoginPayloadRequest>,
     res
 ) => {
-    const { username = '', pass = '', deviceId = '' } = req.body
+    // const { username = '', pass = '', deviceId = '' } = req.body
 
-    const user = await db.findUser(username, pass, deviceId)
+    const user = null
     if (!user) {
         return res.status(401).send('Unauthorized')
     }
@@ -63,13 +63,15 @@ router.post('/login', validate({ body: LoginPayloadRequestSchema }), async (
 })
 
 
-router.post('/refresh', async (req, res) => {
-    const session = db.findSessionByRefreshToken(req.body.refreshToken)
+router.post('/refresh', async (_req, res) => {
+    // const session = db.findSessionByRefreshToken(req.body.refreshToken)
+    const session = null
     if (!session) {
         return res.status(401).send('Unauthorized')
     }
 
-    const user = db.findUserById(session.userId)
+    // const user = db.findUserById(session?.userId)
+    const user = null
     if (!user) {
         return res.status(401).send('Unauthorized')
     }
@@ -78,7 +80,7 @@ router.post('/refresh', async (req, res) => {
     return res.status(200).send(response)
 })
 
-router.post('/logout', async (req, res) => {
+router.post('/logout', async (_req, _res) => {
     // use token/user/deviceid, look up, delete session(s)
 
 })

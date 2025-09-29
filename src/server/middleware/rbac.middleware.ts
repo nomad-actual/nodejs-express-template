@@ -1,5 +1,5 @@
-import logger from '../../utils/logger.ts'
-import { Request } from 'express'
+import logger from '../../utils/logger.js'
+import type { Request } from 'express'
 
 // todo export
 const roles: { [key: string]: number } = {

@@ -68,5 +68,6 @@ typings/
 .vscode/
 
 # fake db
+databases/
 embeddings*.json
 temp.ts

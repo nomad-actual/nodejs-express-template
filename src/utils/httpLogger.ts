@@ -1,11 +1,10 @@
 import PinoHttp from 'pino-http'
 import { randomUUID } from 'node:crypto'
+import logger from './logger.js'
 
-import logger from './logger.ts'
-
-const httpLogger = PinoHttp({
+const httpLogger = PinoHttp.pinoHttp({
     logger: logger,
-    genReqId: (req, res) => {
+    genReqId: (req: any, res: any) => {
         const existingID = req.id ?? req.headers['x-request-id']
         
         if (existingID) return existingID

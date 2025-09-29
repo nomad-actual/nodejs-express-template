@@ -1,7 +1,7 @@
 import * as z from 'zod/v4'
 import { ZodError } from 'zod/v4'
 
-import logger from '../../utils/logger.ts'
+import logger from '../../utils/logger.js'
 
 export function validate(toCheck: {
     body?: z.ZodObject<any>

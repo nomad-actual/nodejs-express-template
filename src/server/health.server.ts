@@ -1,13 +1,13 @@
 import express from 'express';
 import { Server } from 'http';
-import type { HttpServerConfig } from '../utils/config.ts';
-import logger from '../utils/logger.ts';
+import type { HttpServerConfig } from '../utils/config.js';
+import logger from '../utils/logger.js';
 
 
 const healthApp = express();
 let healthInstance: Server;
 
-healthApp.get('/health', async(req, res) => {
+healthApp.get('/health', async(_req, res) => {
     res.status(200).send('OK')
 })
 

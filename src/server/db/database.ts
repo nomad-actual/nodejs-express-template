@@ -1,110 +1,30 @@
-import { DataSource } from 'typeorm'
-import { type UserModel, type SessionModel } from '../../types/types.ts'
-import logger from '../../utils/logger.ts'
-import { generatePasswordHash } from '../../utils/system.utils.ts'
-import { PinoTypeOrmLogger } from './db.logger.ts'
+import logger from '../../utils/logger.js'
+import { User } from './legacy/entities/User.entity.js'
+import { getLegacyDb } from './legacy/legacy.db.js'
 
 
-
-
-
-export function getLegacyDb() {
-    // mysql
-    // can get config from config but we need the config here 
-    // regardless
-    const legacyDbDataSource = new DataSource({
-        type: 'mysql',
-        host: '',
-        port: 3306, // ??
-        username: "test",
-        password: "test",
-        database: "test",
-        synchronize: false,
-        logger: new PinoTypeOrmLogger(logger),
-        entities: [], // todo
-        subscribers: [],
-        migrations: [],
-    })
+export async function startDbs() {
+    return getLegacyDb().initialize()
 }
 
-
-
-
-
-
-const lolDb: { users: UserModel[], sessions: { [key: string]: SessionModel }} = {
-    users: [],
-    sessions: {}
-}
-
-export async function init() {
-    lolDb.users = [{
-        userId: '1',
-        userName: 'CoolAdmin',
-        deviceId: 'someDevice1',
-        pass: await generatePasswordHash('booty'),
-        role: 'admin',
-        features: ['all']
-    }]
-}
-
-export function getDb() {
-    return lolDb
-}
-
-export function saveRefreshToken(userId: string, session: SessionModel) {
-    lolDb.sessions[userId] = session
-}
-
-export async function findUser(username: string, pass: string, deviceId: string) {
-    const hashedPass = await generatePasswordHash(pass)
-
-    const user = lolDb.users.find((u: UserModel) => u.userName === username
-        && u.pass === hashedPass
-        && u.deviceId === deviceId
-    )
-
-    return user || null
-}
-
-export function findUserById(userId: string, role?: string) {
-    if (!userId) return null
-    const user = lolDb.users.find((u: UserModel) => u.userId === userId)
-
-    if (!user) {
-        return null
+export async function stopDbs() {
+    if (!getLegacyDb().isInitialized) {
+        logger.info('Legacy database not init-ed')
+        return
     }
 
-    if (role && role !== user.role) {
-        logger.warn(
-            { userId, requestRole: role, dbRole: user.role }, 
-            'User role does not matching records. Removing session.'
-        )
-
-        delete lolDb.sessions[userId]
-        return null
-    }
-
-    return user || null
+    return getLegacyDb().destroy()
 }
 
+export async function testWrite() {
+    const userRepo = getLegacyDb().getRepository(User)
 
-export function findSessionByUserId(userId: string) {
-    if (!userId) return null
+    const user = new User()
+    user.firstName = 'John'
+    user.lastName = 'Doe'
+    user.isActive = true
+    await userRepo.save(user)
 
-    const session = lolDb.sessions[userId]
-
-    return session || null
-}
-
-
-export function findSessionByRefreshToken(refreshToken: string) {
-    if (!refreshToken) {
-        return null
-    }
-
-    const session = Object.values(lolDb.sessions)
-        .find((s: any) => s.refreshToken === refreshToken)
-
-    return session || null
+    return userRepo.count()
+    
 }
